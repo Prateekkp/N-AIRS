@@ -1,0 +1,19 @@
+mysql:
+  host: "" # e.g., "localhost" 
+  user: "" # e.g., "root"
+  password: "" # e.g., "password"
+  database: "NAIRS"
+
+market_data:
+  index_symbol: "^NSEI"
+  index_name: "NIFTY 50"
+  start_date: "2020-01-01"
+  end_date: "today"
+  interval: "1d"
+
+ingestion:
+  run_id_nifty_prefix: "NIFTY_INGEST"
+  run_id_stock_prefix: "STOCK_INGEST"
+
+url:
+  company_list: "https://archives.nseindia.com/content/indices/ind_nifty50list.csv"

@@ -1,0 +1,23 @@
+# --- Signal Thresholds ---
+rsi_buy: 30
+rsi_sell: 70
+buy_score: 3
+sell_score: -2
+
+# --- Action Profiles ---
+actions:
+  BUY:
+    description: "Strong bullish setup"
+    base_confidence: 0.75
+
+  SELL:
+    description: "Bearish / exit signal"
+    base_confidence: 0.75
+
+  HOLD:
+    description: "Neutral / mixed signals"
+    base_confidence: 0.50
+
+  WATCH:
+    description: "High risk or weak conviction"
+    base_confidence: 0.30

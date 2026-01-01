@@ -1,0 +1,4 @@
+pyyaml
+mysql-connector-python
+yfinance
+ta

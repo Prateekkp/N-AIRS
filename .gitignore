@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.tmp
+*.log
+
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# VSCode
+.vscode/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+
+# MySQL dumps / Generated artifacts
+*.sql
+*.db
+
+# Logs and temp output
+logs/
+temp/
+cache/
