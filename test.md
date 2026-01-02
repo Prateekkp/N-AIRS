@@ -32,28 +32,24 @@ The objective is to create a system that can be integrated into:
 
 ```mermaid
 graph TD
-  A["Market Data APIs"] -->|Raw Feeds| B["Ingestion Layer"]
-  B -->|Indexed & Raw Data| C["Quality Gate"]
-  C -->|Validated Data| D["Feature Store"]
-  D -->|Technical Indicators| E["Decision Engine"]
-  E -->|Buy/Sell/Hold Signals| F["Feedback System"]
-  F -->|Outcome Tracking| G["MySQL Data Store"]
-  G -->|Reporting Views| H["Gold Layer"]
-  H -->|Star Schema| I["Power BI Dashboard"]
+    A["Market Data APIs"] -->|Raw Feeds| B["Ingestion Layer"]
+    B -->|Indexed & Raw Data| C["Quality Gate"]
+    C -->|Validated Data| D["Feature Store"]
+    D -->|Technical Indicators| E["Decision Engine"]
+    E -->|Buy/Sell/Hold Signals| F["Feedback System"]
+    F -->|Outcome Tracking| G["MySQL Data Store"]
     
-  C -->|Anomaly Alerts| G
-  D -->|Computed Features| G
-  E -->|Decision Rules| G
+    C -->|Anomaly Alerts| G
+    D -->|Computed Features| G
+    E -->|Decision Rules| G
     
-  style A fill:#e1f5ff
-  style B fill:#fff3e0
-  style C fill:#fce4ec
-  style D fill:#f3e5f5
-  style E fill:#e8f5e9
-  style F fill:#fff9c4
-  style G fill:#eceff1
-  style H fill:#dcedc8
-  style I fill:#bbdefb
+    style A fill:#e1f5ff
+    style B fill:#fff3e0
+    style C fill:#fce4ec
+    style D fill:#f3e5f5
+    style E fill:#e8f5e9
+    style F fill:#fff9c4
+    style G fill:#eceff1
 ```
 
 ---
@@ -191,8 +187,6 @@ url:
 python run_pipeline.py
 ```
 
-- Gold Layer publish: the pipeline now executes [db/gold-layer-schema.sql](db/gold-layer-schema.sql) as the final step to materialize the reporting views (`fact_signals`, `dim_calendar`, `dim_stocks`, `rpt_quality_summary`) consumed by Power BI.
-
 ### **Individual Module Execution**
 
 ```bash
@@ -217,19 +211,6 @@ python feedback_system/feedback_setup.py
 
 ---
 
-## **Artifacts & Outputs**
-- Power BI report: [artifacts/dashboard/nairs_decision_engine.pbix](artifacts/dashboard/nairs_decision_engine.pbix)
-- Dashboard preview (PNG): [artifacts/outputs/nairs_decision_engine.png](artifacts/outputs/nairs_decision_engine.png)
-- Recent terminal run log (screenshot): [artifacts/outputs/Terminal-Execution.png](artifacts/outputs/Terminal-Execution.png)
-
-**Previews**
-
-![Power BI Dashboard Preview](artifacts/outputs/nairs_decision_engine.png)
-
-![Terminal Execution Log](artifacts/outputs/Terminal-Execution.png)
-
----
-
 ## **Module Reference**
 
 ### **Ingestion Layer**
@@ -251,10 +232,6 @@ python feedback_system/feedback_setup.py
 - `scorer.py` — Evaluates signals against rules
 - `writer.py` — Writes decisions to database
 - `config.yml` — YAML-based rule definitions
-
-### **Reporting Layer**
-- Gold Layer contract: [docs/gold_layer.md](docs/gold_layer.md)
-- Power BI dashboard spec: [docs/powerbi_dashboard.md](docs/powerbi_dashboard.md)
 
 ### **Feedback System**
 - `raw_prices_feedback.py` — Tracks outcome vs. prediction (raw data)
