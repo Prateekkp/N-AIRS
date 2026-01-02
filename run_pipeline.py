@@ -94,6 +94,30 @@ run_step("feature_store/technical_indicator.py","Technical Indicators","FEATURE_
 run_step("decision_engine/decision_setup.py",  "Decision Engine",   "DECISION_ENGINE")
 run_step("feedback_system/feedback_setup.py",  "Feedback Processing","FEEDBACK")
 
+# =====================================================
+# STEP: GOLD LAYER SCHEMA CREATION
+# =====================================================
+print("[GOLD_LAYER] Executing db/gold-layer-schema.sql ...")
+try:
+    with open('db/gold-layer-schema.sql', 'r') as f:
+        sql_content = f.read()
+    
+    # Execute each statement separately
+    for statement in sql_content.split(';'):
+        statement = statement.strip()
+        if statement:
+            cur.execute(statement)
+    
+    con.commit()
+    log_health("GOLD_LAYER", "OK", "Completed successfully")
+    print("[GOLD_LAYER] OK")
+except Exception as e:
+    log_health("GOLD_LAYER", "FAILED", str(e))
+    print("[GOLD_LAYER] FAILED")
+    cur.close()
+    con.close()
+    sys.exit(1)
+
 cur.close()
 con.close()
 
