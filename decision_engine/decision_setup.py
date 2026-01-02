@@ -28,11 +28,13 @@ def fetch_features():
     )
 
     query = """
-    SELECT stock_symbol, trade_date, rsi_14, macd, macd_signal
+    SELECT stock_symbol, trade_date, rsi_14, macd, macd_signal, sma_20, ema_50
     FROM features
     WHERE rsi_14 IS NOT NULL 
       AND macd IS NOT NULL 
       AND macd_signal IS NOT NULL
+      AND sma_20 IS NOT NULL
+      AND ema_50 IS NOT NULL
     ORDER BY trade_date;
     """
 

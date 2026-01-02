@@ -1,15 +1,33 @@
 def decide(score, reasons, cfg):
-    # Threshold-based action selection
-    if score >= cfg["buy_score"]:      # >= 3
-        action = "BUY"
-    elif score <= cfg["sell_score"]:   # <= -2
-        action = "SELL"
-    else:
-        # Trend conflict scenario
-        if "RSI_OVERBOUGHT" in reasons and "MACD_BULLISH" in reasons:
-            action = "WATCH"
-        else:
-            action = "HOLD"
+    """
+    Production-aligned decision logic
+    Config-respecting (no new keys introduced)
+    """
 
-    confidence = cfg["actions"][action]["base_confidence"]
+    buy_score = cfg["buy_score"]
+    sell_score = cfg["sell_score"]
+
+    if score >= buy_score:
+        action = "BUY"
+
+    elif score <= sell_score:
+        action = "SELL"
+
+    # WATCH = close to BUY but not confirmed
+    elif (buy_score - 1.0) <= score < buy_score:
+        action = "WATCH"
+
+    else:
+        action = "HOLD"
+
+    # =========================
+    # Confidence Scaling
+    # =========================
+    base_conf = cfg["actions"][action]["base_confidence"]
+
+    confidence = min(
+        0.95,
+        round(base_conf + abs(score) * 0.05, 2)
+    )
+
     return action, confidence, reasons
